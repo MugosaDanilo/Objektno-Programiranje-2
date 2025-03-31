@@ -1,13 +1,25 @@
 package model;
 
+import jakarta.persistence.*;
+
 import java.util.Date;
 import java.util.Objects;
 
+@Entity
+@NamedQuery(name = Post.GET_POSTS_FOR_APP_USER, query = "Select p from Post p where p.appUser.id = :id")
 public class Post {
+
+    public static final String GET_POSTS_FOR_APP_USER = "Post.getPostsForAppUser";
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "post_seq")
     private Long id;
     private String title;
     private String content;
     private Date publicationDate;
+
+    @ManyToOne
+    private AppUser appUser;
 
     public Post() {
     }

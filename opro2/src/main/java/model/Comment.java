@@ -1,12 +1,25 @@
 package model;
 
+import jakarta.persistence.*;
+
 import java.util.Date;
 import java.util.Objects;
 
+@Entity
+@NamedQuery(name = Comment.GET_COMMENTS_FOR_APP_USER, query = "Select c from Comment c where c.appUser.id = :id")
 public class Comment {
+
+    public static final String GET_COMMENTS_FOR_APP_USER = "Comment.getCommentsForUser";
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "comment_seq")
     private Long id;
     private String text;
     private Date commentDate;
+
+
+    @ManyToOne
+    private AppUser appUser;
 
     public Comment() {
     }
