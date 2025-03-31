@@ -1,0 +1,64 @@
+package model;
+
+import java.util.Date;
+import java.util.Objects;
+
+public class Comment {
+    private Long id;
+    private String text;
+    private Date commentDate;
+
+    public Comment() {
+    }
+
+    public Comment(Long id, String text, Date commentDate) {
+        this.id = id;
+        this.text = text;
+        this.commentDate = commentDate;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public Date getCommentDate() {
+        return commentDate;
+    }
+
+    public void setCommentDate(Date commentDate) {
+        this.commentDate = commentDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "id=" + id +
+                ", text='" + text + '\'' +
+                ", commentDate=" + commentDate +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Comment comment = (Comment) o;
+        return Objects.equals(getId(), comment.getId()) && Objects.equals(getText(), comment.getText()) && Objects.equals(getCommentDate(), comment.getCommentDate());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getText(), getCommentDate());
+    }
+}
