@@ -1,14 +1,14 @@
 package model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.util.Objects;
 
 @Entity
+@NamedQuery(name = Tag.GET_ALL_TAGS, query = "Select t from Tag t")
 public class Tag {
+    public static final String GET_ALL_TAGS = "Tag.getAllTags";
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tag_seq")
     private Long id;

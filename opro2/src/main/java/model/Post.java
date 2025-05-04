@@ -6,9 +6,13 @@ import java.util.Date;
 import java.util.Objects;
 
 @Entity
-@NamedQuery(name = Post.GET_POSTS_FOR_APP_USER, query = "Select p from Post p where p.appUser.id = :id")
+@NamedQueries({
+        @NamedQuery(name = Post.GET_POSTS_FOR_APP_USER, query = "Select p from Post p where p.appUser.id = :id"),
+        @NamedQuery(name = Post.GET_ALL_POSTS, query = "Select p from Post p"),
+})
 public class Post {
 
+    public static final String GET_ALL_POSTS = "Post.getAllPosts";
     public static final String GET_POSTS_FOR_APP_USER = "Post.getPostsForAppUser";
 
     @Id

@@ -8,7 +8,6 @@ import model.AppUser;
 import model.Comment;
 import model.Post;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Dependent
