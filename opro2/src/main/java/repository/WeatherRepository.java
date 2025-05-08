@@ -1,5 +1,6 @@
 package repository;
 
+import exception.WeatherException;
 import jakarta.enterprise.context.Dependent;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
@@ -21,5 +22,13 @@ public class WeatherRepository {
     public boolean existsByCity(String cityName) {
         List<Weather> list = em.createNamedQuery(Weather.GET_WEATHER_FOR_CITY).setParameter("name", cityName).getResultList();
         return list.size() > 0;
+    }
+
+    @Transactional
+    public void createWeatherIfCityNotExists(Weather weather) throws WeatherException {
+        if (existsByCity(weather.getCityName())) {
+            throw new WeatherException("Grad vec postoji");
+        }
+        createWeather(weather);
     }
 }
