@@ -2,6 +2,7 @@ package model;
 
 import jakarta.persistence.*;
 
+import java.io.File;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -18,6 +19,13 @@ public class AppUser {
     private String username;
     private String email;
     private Date registrationDate;
+    private String uploadedFilePath;
+
+    @Transient
+    private File uploadedFile;
+
+    @Transient
+    private String fileContentBase64;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "appuser_id")
@@ -83,6 +91,33 @@ public class AppUser {
 
     public void setCommentList(List<Comment> commentList) {
         this.commentList = commentList;
+    }
+
+    public String getUploadedFilePath() {
+        return uploadedFilePath;
+    }
+
+    public void setUploadedFilePath(String uploadedFilePath) {
+        this.uploadedFilePath = uploadedFilePath;
+    }
+
+    public String getFileContentBase64() {
+        return fileContentBase64;
+    }
+
+    public void setFileContentBase64(String fileContentBase64) {
+        this.fileContentBase64 = fileContentBase64;
+    }
+
+    public File getUploadedFile() {
+        if (uploadedFile == null && uploadedFilePath != null) {
+            uploadedFile = new File(uploadedFilePath);
+        }
+        return uploadedFile;
+    }
+
+    public void setUploadedFile(File uploadedFile) {
+        this.uploadedFile = uploadedFile;
     }
 
     @Override

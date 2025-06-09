@@ -20,6 +20,11 @@ public class UserRepository {
         return em.merge(user);
     }
 
+    public AppUser findById(Long id) {
+        return em.find(AppUser.class, id);
+    }
+
+
     @Transactional
     public List<AppUser> getAllUsers() {
         List<AppUser> appUserList = em.createNamedQuery(AppUser.GET_ALL_APP_USERS, AppUser.class).getResultList();
